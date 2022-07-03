@@ -8,4 +8,12 @@ export const UserSchema = new mongoose.Schema({
   active: { type: Boolean, required: true },
 });
 
+export interface IUser {
+  name: string;
+  email: string;
+  age: string;
+  password: string;
+  active: boolean;
+}
+
 // export class User {}

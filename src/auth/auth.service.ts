@@ -1,3 +1,4 @@
+import { IUser } from '../user/entities/user.entity';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
@@ -11,18 +12,22 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.usersService.findByEmail(email);
-    if (user && user.password) {
-      const result = await compare(password, user.password);
-      return result;
+    let user: IUser;
+    try {
+      user = await this.usersService.findByEmail(email);
+    } catch (error) {
+      return null;
     }
-    return null;
+    const isValid = await compare(password, user.password);
+    if (!isValid) return null;
+
+    return user;
   }
 
   async login(user: any) {
-    const payload = { email: user.email, id: user.userId };
+    const payload = { email: user.email, sub: user._id };
     return {
-      access_token: this.jwtService.sign(payload),
+      token: this.jwtService.sign(payload),
     };
   }
 }
