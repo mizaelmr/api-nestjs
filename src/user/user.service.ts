@@ -32,7 +32,13 @@ export class UserService {
     }
   }
 
-  findAll() {
+  async findAll() {
+    try {
+      const result = await this.userModel.find().exec();
+      return result;
+    } catch (error) {
+      return error.message;
+    }
     return `This action returns all user`;
   }
 
@@ -45,8 +51,13 @@ export class UserService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string | number) {
+    try {
+      const thisEmail = await this.userModel.findOne({ _id: id }).exec();
+      return thisEmail;
+    } catch (error) {
+      return error.message;
+    }
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
