@@ -21,10 +21,9 @@ export class AuthGuard implements CanActivate {
     const token = filterToken[0].split(' ');
 
     try {
-      const payload = this.jwtService.verify(token[1], {
+      this.jwtService.verify(token[1], {
         secret: this.configService.get('JWT_SECRECT_KEY'),
       });
-      console.log(payload, 'console via guard pessoal');
     } catch (error) {
       return false;
     }

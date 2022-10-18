@@ -1,0 +1,30 @@
+export class CreateScheduleDto {
+  groupId?: string;
+  allDay?: string;
+  start?: string;
+  end?: string;
+  daysOfWeek?: string;
+  startTime?: string;
+  endTime?: string;
+  startRecur?: string;
+  endRecur?: string;
+  title?: string;
+  url?: string;
+  interactive?: string;
+  className?: string;
+  editable?: string;
+  startEditable?: string;
+  durationEditable?: string;
+  resourceEditable?: string;
+  resourceId?: string;
+  resourceIds?: string;
+  display?: string;
+  overlap?: string;
+  constraint?: string;
+  color?: string;
+  backgroundColor?: string;
+  borderColor?: string;
+  textColor?: string;
+  extendedProps?: string;
+  client?: string;
+}

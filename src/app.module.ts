@@ -5,9 +5,13 @@ import { AppService } from './app.service';
 import { AuthMiddleware } from './middleware/auth.middleware';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { ExerciceModule } from './exercice/exercice.module';
+import { FinanceModule } from './finance/finance.module';
 import { JwtService } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ScheduleModule } from './schedule/schedule.module';
 import { UserModule } from './user/user.module';
+import { AvaliableModule } from './avaliable/avaliable.module';
 
 @Module({
   imports: [
@@ -15,6 +19,10 @@ import { UserModule } from './user/user.module';
     MongooseModule.forRoot(process.env.MONGO_URI),
     UserModule,
     AuthModule,
+    ExerciceModule,
+    ScheduleModule,
+    FinanceModule,
+    AvaliableModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtService],

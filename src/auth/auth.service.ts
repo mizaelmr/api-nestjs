@@ -1,4 +1,4 @@
-import { IUser } from '../user/entities/user.entity';
+import { CreateUserDto as IUser } from '../user/dto/create-user.dto';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';

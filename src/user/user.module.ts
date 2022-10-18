@@ -3,13 +3,13 @@ import { JwtService } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserController } from './user.controller';
-import { UserSchema } from './entities/user.entity';
 import { UserService } from './user.service';
+import { userSchema } from './entities/user.entity';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: 'User', schema: UserSchema, collection: 'users' },
+      { name: 'User', schema: userSchema, collection: 'users' },
     ]),
   ],
   controllers: [UserController],
