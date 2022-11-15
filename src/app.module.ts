@@ -12,6 +12,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ScheduleModule } from './schedule/schedule.module';
 import { UserModule } from './user/user.module';
 import { AvaliableModule } from './avaliable/avaliable.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AvaliableModule } from './avaliable/avaliable.module';
     ScheduleModule,
     FinanceModule,
     AvaliableModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtService],

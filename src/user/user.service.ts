@@ -12,52 +12,43 @@ export class UserService {
     private readonly userModel: Model<CreateUserDto>,
   ) {}
   async create(createUserDto: CreateUserDto) {
-    try {
-      const email = await this.userModel
-        .findOne({ email: createUserDto.email })
-        .exec();
+    const email = await this.userModel
+      .findOne({ email: createUserDto.email })
+      .exec();
 
-      if (email) {
-        throw new HttpException('Email já existe', 401);
-      }
-
-      const pass = await hash(createUserDto.password, 10);
-      const result = await new this.userModel({
-        ...createUserDto,
-        password: pass,
-      }).save();
-      return result;
-    } catch (error) {
-      return error.message;
+    if (email) {
+      throw new HttpException('Email já existe', 401);
     }
+
+    const pass = await hash(createUserDto.password, 10);
+    const result = await new this.userModel({
+      ...createUserDto,
+      password: pass,
+    }).save();
+
+    const res = {
+      message: 'Registrado com sucesso.',
+      data: result,
+    };
+
+    return res;
   }
 
   async findAll() {
-    try {
-      const result = await this.userModel.find().exec();
-      return result;
-    } catch (error) {
-      return error.message;
-    }
+    const result = await this.userModel.find().exec();
+    return result;
+
     return `This action returns all user`;
   }
 
   async findByEmail(email: string) {
-    try {
-      const thisEmail = await this.userModel.findOne({ email }).exec();
-      return thisEmail;
-    } catch (error) {
-      return error.message;
-    }
+    const thisEmail = await this.userModel.findOne({ email }).exec();
+    return thisEmail;
   }
 
   async findOne(id: string | number) {
-    try {
-      const thisEmail = await this.userModel.findOne({ _id: id }).exec();
-      return thisEmail;
-    } catch (error) {
-      return error.message;
-    }
+    const thisEmail = await this.userModel.findOne({ _id: id }).exec();
+    return thisEmail;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
@@ -65,17 +56,13 @@ export class UserService {
   }
 
   async remove(id: string) {
-    try {
-      if (!id) {
-        throw new HttpException('Email já existe', 401);
-      }
-      await this.userModel.findOneAndRemove({ _id: id });
-
-      const data = { message: 'Deletado com sucesso!' };
-
-      return data;
-    } catch (error) {
-      return error.message;
+    if (!id) {
+      throw new HttpException('Email já existe', 401);
     }
+    await this.userModel.findOneAndRemove({ _id: id });
+
+    const data = { message: 'Deletado com sucesso!' };
+
+    return data;
   }
 }
